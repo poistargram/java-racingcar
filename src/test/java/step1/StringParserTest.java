@@ -39,6 +39,32 @@ class StringParserTest {
 		assertThat(StringParser.subString(string, from, to)).isEqualTo(expectedString);
 	}
 
+	@Test
+	@DisplayName("문자열에서 특정 인덱스의 문자를 잘 가져오는지 테스트")
+	void charAt(){
+		String string = "abc";
+		int index = 0;
+		char expectedChar = 'a';
+
+		assertThat(StringParser.charAt(string, index)).isEqualTo(expectedChar);
+	}
+
+	@Test
+	@DisplayName("문자열의 특정 인덱스 문자를 가져올 때 인덱스 범위를 벗어난 경우 1")
+	void charAtException1(){
+		String string = "abc";
+		int index = -1;
+		assertThatThrownBy(() -> StringParser.charAt(string, index)).isInstanceOf(StringIndexOutOfBoundsException.class);
+	}
+
+	@Test
+	@DisplayName("문자열의 특정 인덱스 문자를 가져올 때 인덱스 범위를 벗어난 경우 2")
+	void charAtException2(){
+		String string = "abc";
+		int index = string.length();
+		assertThatThrownBy(() -> StringParser.charAt(string, index)).isInstanceOf(StringIndexOutOfBoundsException.class);
+	}
+
 	private void contains(String[] array, String object){
 		assertThat(array).contains(object);
 	}

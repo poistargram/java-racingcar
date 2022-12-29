@@ -10,4 +10,8 @@ public class StringParser {
 		return string.substring(from, to);
 	}
 
+	public static char charAt(String string, int index){
+		return string.charAt(index);
+	}
+
 }
