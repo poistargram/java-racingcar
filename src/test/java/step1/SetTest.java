@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
@@ -33,10 +34,17 @@ public class SetTest {
 		assertThat(numbers.size()).isEqualTo(expectedSize);
 	}
 
-	@ParameterizedTest(name = "Set에 값이 존재하는지 테스트")
+	@ParameterizedTest(name = "Set에 값이 존재하는지 테스트1")
 	@ValueSource(ints = {1, 2, 3})
 	void contains(int value){
 		assertThat(numbers.contains(value)).isTrue();
 	}
+
+	@ParameterizedTest(name = "Set에 값이 존재하는지 테스트2")
+	@CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+	void contains(int value, boolean expected){
+		assertThat(numbers.contains(value)).isEqualTo(expected);
+	}
+
 
 }
