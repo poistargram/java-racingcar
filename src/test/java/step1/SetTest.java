@@ -9,6 +9,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
 
@@ -29,6 +31,12 @@ public class SetTest {
 		int expectedSize = numbers.size();
 
 		assertThat(numbers.size()).isEqualTo(expectedSize);
+	}
+
+	@ParameterizedTest(name = "Set에 값이 존재하는지 테스트")
+	@ValueSource(ints = {1, 2, 3})
+	void contains(int value){
+		assertThat(numbers.contains(value)).isTrue();
 	}
 
 }
