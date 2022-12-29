@@ -1,5 +1,7 @@
 package step1;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,12 +28,23 @@ class StringParserTest {
 		containsExactly(parsedString, "1");
 	}
 
+	@Test
+	@DisplayName("부분 문자열을 잘 반환하는지 테스트")
+	void subString(){
+		String string = "(1,2)";
+		int from = 1;
+		int to = string.length()-1;
+		String expectedString = "1,2";
+
+		assertThat(StringParser.subString(string, from, to)).isEqualTo(expectedString);
+	}
+
 	private void contains(String[] array, String object){
-		Assertions.assertThat(array).contains(object);
+		assertThat(array).contains(object);
 	}
 
 	private void containsExactly(String[] array, String object){
-		Assertions.assertThat(array).containsExactly(object);
+		assertThat(array).containsExactly(object);
 	}
 
 }

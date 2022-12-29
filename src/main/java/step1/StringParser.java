@@ -6,4 +6,8 @@ public class StringParser {
 		return string.split(regex);
 	}
 
+	public static String subString(String string, int from, int to){
+		return string.substring(from, to);
+	}
+
 }
