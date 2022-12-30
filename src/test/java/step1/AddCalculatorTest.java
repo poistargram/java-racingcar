@@ -5,24 +5,17 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class AddCalculatorTest {
 
 	AddCalculator addCalculator = new AddCalculator();
 
-	@Test
-	@DisplayName("문자열이 null인 경우 0 반환 테스트")
-	void test1(){
-		String string = null;
-		assertThat(addCalculator.add(string)).isEqualTo(0);
-	}
-
-	@Test
-	@DisplayName("문자열이 빈문자열일 경우 0 반환 테스트")
-	void test2(){
-		String string = "";
-		assertThat(addCalculator.add(string)).isEqualTo(0);
+	@ParameterizedTest
+	@NullAndEmptySource
+	void test12(String expression){
+		assertThat(addCalculator.add(expression)).isEqualTo(0);
 	}
 
 	@ParameterizedTest(name = "숫자 하나만 입력으로 들어온 경우")
