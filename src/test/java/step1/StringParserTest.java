@@ -53,16 +53,16 @@ class StringParserTest {
 	@DisplayName("문자열의 특정 인덱스 문자를 가져올 때 인덱스 범위를 벗어난 경우 1")
 	void charAtException1(){
 		String string = "abc";
-		int index = -1;
-		assertThatThrownBy(() -> StringParser.charAt(string, index)).isInstanceOf(StringIndexOutOfBoundsException.class);
+		int invalidIndex = -1;
+		assertThatThrownBy(() -> StringParser.charAt(string, invalidIndex)).isInstanceOf(StringIndexOutOfBoundsException.class);
 	}
 
 	@Test
 	@DisplayName("문자열의 특정 인덱스 문자를 가져올 때 인덱스 범위를 벗어난 경우 2")
 	void charAtException2(){
 		String string = "abc";
-		int index = string.length();
-		assertThatThrownBy(() -> StringParser.charAt(string, index)).isInstanceOf(StringIndexOutOfBoundsException.class);
+		int invalidIndex = string.length();
+		assertThatThrownBy(() -> StringParser.charAt(string, invalidIndex)).isInstanceOf(StringIndexOutOfBoundsException.class);
 	}
 
 	private void containsExactly(String[] array, String object){
