@@ -15,7 +15,7 @@ class StringParserTest {
 		String regex = ",";
 
 		String[] parsedString = StringParser.parse(string, regex);
-		contains(parsedString, "1");
+		assertThat(parsedString).contains("1");
 	}
 
 	@Test
@@ -63,10 +63,6 @@ class StringParserTest {
 		String string = "abc";
 		int index = string.length();
 		assertThatThrownBy(() -> StringParser.charAt(string, index)).isInstanceOf(StringIndexOutOfBoundsException.class);
-	}
-
-	private void contains(String[] array, String object){
-		assertThat(array).contains(object);
 	}
 
 	private void containsExactly(String[] array, String object){
