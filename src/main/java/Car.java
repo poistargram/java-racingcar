@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Car {
 
 	private String name;
@@ -14,5 +16,11 @@ public class Car {
 
 	public int getState() {
 		return state;
+	}
+
+	public void attempt(int number){
+		if(number > 4){
+			this.state++;
+		}
 	}
 }
