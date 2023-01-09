@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class Calculator {
 
-	public int run(String expression){
+	public static int run(String expression){
 		validate(expression);
 		Queue<String> expressionUnit = spiltExpression(expression);
 
@@ -24,17 +24,17 @@ public class Calculator {
 
 	// ====================================================================================
 
-	private void validate(String expression) {
-		if(Objects.isNull(expression) || expression.isBlank()){
+	private static void validate(String expression) {
+		if(expression == null || expression.isBlank()){
 			throw new IllegalArgumentException();
 		}
 	}
 
-	private Queue<String> spiltExpression(String expression){
+	private static Queue<String> spiltExpression(String expression){
 		return new ArrayDeque<>(Arrays.asList(expression.split(" ")));
 	}
 
-	private int calculate(int first, String operator, String number) {
+	private static int calculate(int first, String operator, String number) {
 		if(!isNumber(number)){
 			throw new IllegalArgumentException();
 		}
@@ -57,7 +57,7 @@ public class Calculator {
 		throw new IllegalArgumentException();
 	}
 
-	private int getNumber(String number){
+	private static int getNumber(String number){
 		if(!isNumber(number)){
 			throw new IllegalArgumentException();
 		}
@@ -65,7 +65,7 @@ public class Calculator {
 		return Integer.parseInt(number);
 	}
 
-	private boolean isNumber(String unit){
+	private static boolean isNumber(String unit){
 		char firstChar = unit.charAt(0);
 		if(firstChar != '-' && (firstChar < '0' || firstChar > '9')){
 			return false;
@@ -81,7 +81,7 @@ public class Calculator {
 		return true;
 	}
 
-	private boolean isOperator(String operator){
+	private static boolean isOperator(String operator){
 		if(operator.length() != 1) {
 			return false;
 		}
