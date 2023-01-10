@@ -1,12 +1,9 @@
-import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.Queue;
 
 public class Calculator {
 
 	public static int run(String expression){
-		validate(expression);
-		Queue<String> expressionUnit = spiltExpression(expression);
+		Queue<String> expressionUnit = ExpressionParser.parse(expression);
 
 		int result = getNumber(expressionUnit.poll());
 		while(expressionUnit.size() > 1){
@@ -22,16 +19,6 @@ public class Calculator {
 	}
 
 	// ====================================================================================
-
-	private static void validate(String expression) {
-		if(expression == null || expression.isBlank()){
-			throw new IllegalArgumentException();
-		}
-	}
-
-	private static Queue<String> spiltExpression(String expression){
-		return new ArrayDeque<>(Arrays.asList(expression.split(" ")));
-	}
 
 	private static int calculate(int first, String operator, String number) {
 		if(!isNumber(number)){
