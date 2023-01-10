@@ -1,6 +1,5 @@
 import java.util.ArrayDeque;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Queue;
 
 public class Calculator {
@@ -39,22 +38,8 @@ public class Calculator {
 			throw new IllegalArgumentException();
 		}
 
-		if(!isOperator(operator)){
-			throw new IllegalArgumentException();
-		}
-
 		int second = Integer.parseInt(number);
-		switch (operator){
-		case "+":
-			return first+second;
-		case "-":
-			return first-second;
-		case "*":
-			return first*second;
-		case "/":
-			return first/second;
-		}
-		throw new IllegalArgumentException();
+		return Operator.from(operator).operate(first, second);
 	}
 
 	private static int getNumber(String number){
@@ -79,19 +64,6 @@ public class Calculator {
 		}
 
 		return true;
-	}
-
-	private static boolean isOperator(String operator){
-		if(operator.length() != 1) {
-			return false;
-		}
-
-		char op = operator.charAt(0);
-		if(op == '+' || op == '-' || op == '*' || op == '/'){
-			return true;
-		}
-
-		return false;
 	}
 
 }
