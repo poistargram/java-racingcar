@@ -16,9 +16,7 @@ public class Car {
 		return state;
 	}
 
-	public void attempt(int number){
-		if(number > 4){
-			this.state++;
-		}
+	public void go(){
+		 this.state++;
 	}
 }

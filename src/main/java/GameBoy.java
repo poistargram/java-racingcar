@@ -10,7 +10,7 @@ public class GameBoy {
 		GameBoy.init().play();
 	}
 
-//	public final static int PIVOT_NUMBER = 4;
+	public final static int PIVOT_NUMBER = 4;
 	public final static int BOUND_NUMBER = 10;
 
 	private List<Car> cars = new ArrayList<>();
@@ -45,19 +45,22 @@ public class GameBoy {
 	public void play() {
 		Printer.playInfo();
 		for (int i = 0; i < playCount; i++) {
-			playCar();
+			playCars();
 			Printer.printCars(cars);
 		}
 
 		Printer.printResult(getWinners());
 	}
 
-	private void playCar() {
-		cars.forEach(car -> {
-			int randomNumber = getRandomNumberLessThanInput();
-			System.out.println(randomNumber);
-			car.attempt(randomNumber);
-		});
+	private void playCars() {
+		cars.forEach(this::playCar);
+	}
+
+	private void playCar(Car car){
+		int randomNumber = getRandomNumberLessThanInput();
+		if(randomNumber >= PIVOT_NUMBER){
+			car.go();
+		}
 	}
 
 	private List<Car> getWinners() {

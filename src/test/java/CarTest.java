@@ -25,32 +25,16 @@ class CarTest {
 	}
 
 	@Test
-	@DisplayName("자동차 주행 테스트: 인풋이 4이상인 경우만 전진")
-	@RepeatedTest(value = 10)
+	@DisplayName("자동차 주행 테스트")
 	public void test2(){
 		// given
 		String carName = "poi-Tesla-ModelS";
-		Car runSuccess = new Car(carName, 0);
-		Car runFail = new Car(carName, 0);
+		Car car = new Car(carName, 0);
 
 		// when
-		runSuccess.attempt(getLessThanInput(4));
-		runFail.attempt(getMoreThanInput(5));
+		car.go();
 
-		//then
-		assertThat(runSuccess.getState()).isEqualTo(0);
-		assertThat(runFail.getState()).isEqualTo(1);
+		// then
+		assertThat(car.getState()).isEqualTo(1);
 	}
-
-	private int getLessThanInput(int input){
-		return ((int) (Math.random() * 10000)) % (input + 1);
-	}
-
-	private int getMoreThanInput(int input){
-		int ret = ((int) (Math.random() * 10000)) % (input + 1);
-		ret = ret >= 0 ? ret : ret*-1;
-		ret = ret >= input ? input : ret+input;
-		return ret;
-	}
-
 }
