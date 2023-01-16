@@ -6,15 +6,19 @@ import java.util.stream.Collectors;
 
 public class GameBoy {
 
-	public final static int pivotNumber = 4;
+	public static void main(String[] args) {
+		GameBoy.init().play();
+	}
+
+//	public final static int PIVOT_NUMBER = 4;
+	public final static int BOUND_NUMBER = 10;
 
 	private List<Car> cars = new ArrayList<>();
 	private int playCount;
 
+	private GameBoy() {}
 
-	private GameBoy(){}
-
-	public static GameBoy init(){
+	public static GameBoy init() {
 		GameBoy gameBoy = new GameBoy();
 		Scanner scan = new Scanner(System.in);
 		initCars(gameBoy, scan);
@@ -26,17 +30,40 @@ public class GameBoy {
 		gameBoy.playCount = Integer.parseInt(scan.nextLine());
 	}
 
-	public static void initCars(GameBoy gameBoy, Scanner scan){
-		System.out.println("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분).");
+	public static void initCars(GameBoy gameBoy, Scanner scan) {
+		Printer.initInfo();
 		String carLine = scan.nextLine();
 		String[] carNames = carLine.split(",");
 
 		gameBoy.cars = Arrays.stream(carNames).map(name -> new Car(name, 0)).collect(Collectors.toList());
 	}
 
-	public static int getRandomNumberLessThanInput(){
-		return ((int) (Math.random() * 10000)) % pivotNumber;
+	public static int getRandomNumberLessThanInput() {
+		return ((int) (Math.random() * 10000)) % BOUND_NUMBER;
 	}
 
+	public void play() {
+		Printer.playInfo();
+		for (int i = 0; i < playCount; i++) {
+			playCar();
+			Printer.printCars(cars);
+		}
+
+		Printer.printResult(getWinners());
+	}
+
+	private void playCar() {
+		cars.forEach(car -> {
+			int randomNumber = getRandomNumberLessThanInput();
+			System.out.println(randomNumber);
+			car.attempt(randomNumber);
+		});
+	}
+
+	private List<Car> getWinners() {
+		int max = cars.stream().mapToInt(Car::getState).max().getAsInt();
+
+		return cars.stream().filter(car -> car.getState() == max).map(car -> new Car(car.getName(), car.getState())).collect(Collectors.toList());
+	}
 
 }
